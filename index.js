@@ -24,17 +24,39 @@ function increaseRankBy(n) {
 
 function deepestChild() {
 
-  const grandDiv = document.getElementById('grand-node');
+  let prevChildNode;
 
-  const grandDivChildren = grandDiv.querySelectorAll('div');
+  const grandNode = document.getElementById('grand-node');
 
-  for(var i = 0; i < grandDivChildren.length; i++) {
+  const nodeChildren = grandNode.querySelectorAll('div');
 
-    if(grandDivChildren[i].textContent !== '') {
-      return grandDivChildren[i]
+  for(var i = 0; i < nodeChildren.length; i++) {
+    // Loop through nodelist, if current node has a child element it evaluates to 'true' and we know we can go 'deeper'.
+   // If it evaluates 'false' then we know there are no more nested elements and we return the last node which 'did' have a child element because it is the deepest stored node.
+    if(nodeChildren[i].hasChildNodes()) {
+      //  We assign the current node that passes to the prevChildNode variable and 'continue' the loop.
+      prevChildNode = nodeChildren[i]
+      continue
+
     }
 
   }
-
-
+  
+  return prevChildNode
 }
+
+
+// function deepestChild() {
+//   let node = document.getElementById('grand-node')
+//   let nextNode = node.children[0]
+//   console.log(node.children[0].children[0].children[0].children[0])
+//
+//   while (nextNode) {
+//     node = nextNode
+//
+//     nextNode = node.children[0]
+//
+//   }
+//
+//   return node
+// }
